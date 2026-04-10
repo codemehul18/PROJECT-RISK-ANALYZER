@@ -30,5 +30,5 @@ df['risk_level'] = df.apply(label_risk, axis=1)
 
 # Save to CSV
 os.makedirs('data', exist_ok=True)
-df.to_csv('data/project_data.csv', index=False)
+df.to_csv('./data/project_data.csv', index=False)
 print("✅ Synthetic data saved to data/project_data.csv")

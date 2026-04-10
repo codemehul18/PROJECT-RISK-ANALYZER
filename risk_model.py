@@ -9,7 +9,7 @@ import joblib
 import os
 
 # Load dataset
-data_path = 'data/project_data.csv'
+data_path = '../data/project_data.csv'
 if not os.path.exists(data_path):
     raise FileNotFoundError(f"Dataset not found at {data_path}")
 
