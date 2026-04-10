@@ -1,4 +1,5 @@
-
+import matplotlib.pyplot as plt
+import pandas as pd
 
 import streamlit as st
 import pandas as pd
@@ -8,6 +9,26 @@ import joblib
 model = joblib.load("model/risk_model.pkl")
 scaler = joblib.load("model/scaler.pkl")
 label_encoders = joblib.load("model/label_encoders.pkl")
+
+st.subheader("📊 Feature Importance")
+
+try:
+    importances = model.feature_importances_
+    feature_names = model.feature_names_in_
+
+    df_importance = pd.DataFrame({
+        "Feature": feature_names,
+        "Importance": importances
+    }).sort_values(by="Importance", ascending=False)
+
+    fig, ax = plt.subplots()
+    ax.barh(df_importance["Feature"], df_importance["Importance"])
+    ax.invert_yaxis()
+
+    st.pyplot(fig)
+
+except Exception as e:
+    st.warning("Feature importance not available")
 
 st.title("📊 Project Risk Prediction System")
 
