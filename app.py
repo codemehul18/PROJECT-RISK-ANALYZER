@@ -14,13 +14,16 @@ st.subheader("📊 Feature Importance")
 
 try:
     importances = model.feature_importances_
-    feature_names = model.feature_names_in_
+
+    # Use dummy feature names (safe fallback)
+    feature_names = [f"Feature {i}" for i in range(len(importances))]
 
     df_importance = pd.DataFrame({
         "Feature": feature_names,
         "Importance": importances
     }).sort_values(by="Importance", ascending=False)
 
+    import matplotlib.pyplot as plt
     fig, ax = plt.subplots()
     ax.barh(df_importance["Feature"], df_importance["Importance"])
     ax.invert_yaxis()
@@ -28,7 +31,7 @@ try:
     st.pyplot(fig)
 
 except Exception as e:
-    st.warning("Feature importance not available")
+    st.error(f"Error: {e}")
 
 st.title("📊 Project Risk Prediction System")
 
