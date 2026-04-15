@@ -9,7 +9,7 @@ import joblib
 import os
 
 # Load dataset
-data_path = '../data/project_data.csv'
+data_path = 'data/project_data.csv'
 if not os.path.exists(data_path):
     raise FileNotFoundError(f"Dataset not found at {data_path}")
 
@@ -49,8 +49,6 @@ print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
 
 # Save model and label encoder
 os.makedirs('model', exist_ok=True)
-joblib.dump(model, 'model/risk_model.pkl')
-joblib.dump(le, 'model/label_encoder.pkl')
-joblib.dump(scaler, 'model/scaler.pkl')
-
-print("Model saved to 'model/risk_model.pkl'")
+joblib.dump(model, 'model/model.pkl' )
+joblib.dump(X.columns.tolist(),'model/coloumns.pkl')
+print("Model and columns saved successfully")
